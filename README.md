@@ -109,3 +109,43 @@ npm run dev
 The server will start at:
 
 http://localhost:5000
+
+## Payment Flow
+
+This API integrates with **Stripe** for payment processing using the Payment Intent API.
+
+### Payment Flow Steps:
+
+1. **User creates an order** - `POST /api/v1/orders`
+   - Send authenticated request with `productId`
+   - Backend fetches product and creates a Stripe `PaymentIntent`
+   - Order is created in database with status `PENDING`
+   - Response includes `clientSecret`, `orderId`, and payment details
+
+2. **Payment is confirmed** 
+   - In test mode: Payment is instantly confirmed with test card `pm_card_visa`
+   - In production: Customer would complete payment on frontend using `clientSecret`
+
+3. **Stripe sends webhook notification** - `POST /api/v1/webhooks/stripe`
+   - Stripe notifies backend of payment outcome
+   - Backend validates webhook signature using `STRIPE_WEBHOOK_SECRET`
+   
+4. **Order status is automatically updated** based on webhook event:
+   - **`payment_intent.succeeded`** → Order status changes from `PENDING` to `PAID` ✅
+   - **`payment_intent.payment_failed`** → Order status changes to `FAILED` ❌
+   - **`payment_intent.canceled`** → Order status changes to `FAILED` ❌
+
+5. **Order is ready for fulfillment** - Get order details via `GET /api/v1/orders/:id`
+   - Check order status to confirm payment
+   - Process the order based on status
+
+### Testing with Stripe Test Mode:
+- Test card: `4242 4242 4242 4242`
+- Expiry: Any future date (e.g., 12/25)
+- CVC: Any 3-digit number (e.g., 123)
+- Webhook events fire automatically in test mode
+
+### Important Notes:
+- Webhook endpoint must be registered in Stripe Dashboard: `https://your-domain.com/api/v1/webhooks/stripe`
+- All requests require JWT authentication (except auth endpoints)
+- Orders are stored in PostgreSQL with Prisma ORM
