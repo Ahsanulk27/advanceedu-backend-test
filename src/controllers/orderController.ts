@@ -1,8 +1,8 @@
 import type { Response, NextFunction } from "express";
-import { prisma } from "../config/db.ts";
-import { OrderStatus } from "../generated/prisma/enums.ts";
-import type { authRequest } from "../middleware/authMiddleware.ts";
-import { ApiError } from "../utils/ApiError.ts";
+import { prisma } from "../config/db";
+import { OrderStatus } from "../generated/prisma/enums";
+import type { authRequest } from "../middleware/authMiddleware";
+import { ApiError } from "../utils/ApiError";
 import Stripe from "stripe";
 import dotenv from "dotenv";
 import path from "path";

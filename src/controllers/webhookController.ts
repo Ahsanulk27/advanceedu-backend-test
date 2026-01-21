@@ -1,10 +1,10 @@
 import type { Request, Response, NextFunction } from "express";
-import { prisma } from "../config/db.ts";
-import { OrderStatus } from "../generated/prisma/enums.ts";
+import { prisma } from "../config/db";
+import { OrderStatus } from "../generated/prisma/enums";
 import Stripe from "stripe";
 import dotenv from "dotenv";
 import path from "path";
-import { ApiError } from "../utils/ApiError.ts";
+import { ApiError } from "../utils/ApiError";
 
 dotenv.config({ path: path.resolve(process.cwd(), ".env.development") });
 if (!process.env.STRIPE_SECRET_KEY) {

@@ -1,8 +1,8 @@
 import type { Request, Response, NextFunction } from "express";
-import { prisma } from "../config/db.ts";
+import { prisma } from "../config/db";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { ApiError } from "../utils/ApiError.ts";
+import { ApiError } from "../utils/ApiError";
 
 export const signup = async (req: Request, res: Response, next: NextFunction) => {
   try {

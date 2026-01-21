@@ -6,12 +6,12 @@ dotenv.config({ path: path.resolve(process.cwd(), `.env.${env}`) });
 
 import express from "express";
 import type { Request, Response } from "express";
-import authRouter from "./routes/authRoutes.ts";
-import productRouter from "./routes/productRoutes.ts";
-import orderRouter from "./routes/orderRoutes.ts";
-import userRouter from "./routes/userRoutes.ts";
-import { errorHandler } from "./middleware/errorMiddleware.ts";
-import webhookRouter from "./routes/webhookRoutes.ts";
+import authRouter from "./routes/authRoutes";
+import productRouter from "./routes/productRoutes";
+import orderRouter from "./routes/orderRoutes";
+import userRouter from "./routes/userRoutes";
+import { errorHandler } from "./middleware/errorMiddleware";
+import webhookRouter from "./routes/webhookRoutes";
 
 const app = express();
 const PORT = process.env.PORT;

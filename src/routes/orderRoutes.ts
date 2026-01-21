@@ -3,8 +3,8 @@ import {
   createOrder,
   getUserOrders,
   getSingleOrder,
-} from "../controllers/orderController.ts";
-import { authMiddleware } from "../middleware/authMiddleware.ts";
+} from "../controllers/orderController";
+import { authMiddleware } from "../middleware/authMiddleware";
 
 const orderRouter = Router();
 

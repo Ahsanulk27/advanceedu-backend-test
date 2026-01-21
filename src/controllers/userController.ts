@@ -1,7 +1,7 @@
 import type { NextFunction, Response } from "express";
-import { prisma } from "../config/db.ts";
-import type { authRequest } from "../middleware/authMiddleware.ts";
-import { ApiError } from "../utils/ApiError.ts";
+import { prisma } from "../config/db";
+import type { authRequest } from "../middleware/authMiddleware";
+import { ApiError } from "../utils/ApiError";
 
 export const getUser = async (
   req: authRequest,
