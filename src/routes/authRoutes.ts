@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import { Router } from "express";
-import {signup, signin, signout} from "../controllers/authController.ts"
+import {signup, signin, signout} from "../controllers/authController";
 const authRouter = Router();
 
 authRouter.post("/sign-in", signin);

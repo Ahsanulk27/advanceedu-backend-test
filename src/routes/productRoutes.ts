@@ -1,7 +1,7 @@
 import { Router } from "express";
 import type { Request, Response } from "express";
-import { getAllProducts, addProduct } from "../controllers/productController.ts";
-import { authMiddleware } from "../middleware/authMiddleware.ts";
+import { getAllProducts, addProduct } from "../controllers/productController";
+import { authMiddleware } from "../middleware/authMiddleware";
 
 const productRouter = Router();
 
